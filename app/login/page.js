@@ -1,5 +1,6 @@
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaGoogle } from "react-icons/fa6";
+import { signIn } from "@/auth";
 
 export default function Login() {
   return (
@@ -19,7 +20,12 @@ export default function Login() {
 
           <p className="mt-5 text-gray-700 text-center">Or signup with</p>
 
-          <form>
+          <form
+            action={ async () => {
+              "use server"
+              await signIn("google")
+            }}
+          >
             <button className="w-full h-11 rounded-full shadow-md bg-red-300 flex items-center justify-center gap-2 mt-5 cursor-pointer">
               <FaGoogle className="text-white text-2xl" />
               <span className="text-white text-xl">Google</span>

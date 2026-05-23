@@ -81,7 +81,7 @@ export default function Home() {
     </div>
 
     <div className="w-full h-30 rounded-xl bg-slate-800/50 border border-slate-700/30 p-4 relative overflow-hidden">
-      {/* <div className="flex items-end justify-between h-full gap-1">
+      <div className="flex items-end justify-between h-full gap-1">
         <div className="w-full bg-emerald-500/20 rounded-sm" style={{ height: '40%' }} />
         <div className="w-full bg-emerald-500/20 rounded-sm" style={{ height: '65%' }} />
         <div className="w-full bg-emerald-500/20 rounded-sm" style={{ height: '45%' }} />
@@ -94,7 +94,7 @@ export default function Home() {
         <div className="w-full bg-emerald-500/20 rounded-sm" style={{ height: '75%' }} />
         <div className="w-full bg-emerald-500/20 rounded-sm" style={{ height: '50%' }} />
         <div className="w-full bg-emerald-500/20 rounded-sm" style={{ height: '95%' }} />
-      </div> */}
+      </div>
     </div>
 
     <div className="mt-6 flex gap-2">
@@ -129,7 +129,7 @@ export default function Home() {
     </div>
 
     <div className="w-full h-30 rounded-xl bg-slate-800/50 border border-slate-700/30 p-4 flex flex-col justify-center gap-3">
-      {/* <div className="space-y-2">
+      <div className="space-y-2">
         <div className="flex justify-between text-xs text-slate-400">
           <span>Housing</span>
           <span className="text-white">$1,200</span>
@@ -155,7 +155,7 @@ export default function Home() {
         <div className="w-full bg-slate-700 rounded-full h-2">
           <div className="bg-cyan-500 h-2 rounded-full" style={{ width: '25%' }} />
         </div>
-      </div> */}
+      </div>
     </div>
 
     <div className="mt-6">
@@ -190,7 +190,7 @@ export default function Home() {
     </div>
 
     <div className="w-full h-30 rounded-xl bg-slate-800/50 border border-slate-700/30 p-4 relative">
-      {/* <div className="flex items-center justify-center h-full">
+      <div className="flex items-center justify-center h-full">
         <div className="relative w-24 h-24">
           <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
             <path className="text-slate-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" strokeWidth="3" />
@@ -202,7 +202,7 @@ export default function Home() {
             <span className="text-white text-xs font-bold">YTD</span>
           </div>
         </div>
-      </div> */}
+      </div>
     </div>
 
     <div className="mt-6 grid grid-cols-3 gap-2 text-center">
