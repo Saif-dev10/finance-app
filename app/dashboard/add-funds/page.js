@@ -1,9 +1,11 @@
  "use client"
 import { db } from "@/config/firebase.config";
-import { Card, CardContent, CardHeader, TextField, FormControl, InputLabel, Select, MenuItem  } from "@mui/material";
+import { Card, CardContent, CardHeader, TextField, FormControl, InputLabel, Select, MenuItem,  CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, Button, Typography } from "@mui/material";
 import { addDoc, collection } from "firebase/firestore";
 import { useFormik } from "formik";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 import * as yup from "yup";
 
 const schema = yup.object().shape({
@@ -15,8 +17,15 @@ const schema = yup.object().shape({
 });
 
 export default function AddFunds() {
+  const [loading, setLoading] = useState();
+  const [open, setOpen] = useState(false)
   const {data: session} = useSession();
-  console.log(session);
+
+  if (!session) {
+    redirect("/login");
+  }
+  
+  const closeModel = () => setOpen(false);
 
   const {handleSubmit, handleChange, values, errors, touched} = useFormik({
     initialValues: {
@@ -26,6 +35,7 @@ export default function AddFunds() {
     },
     onSubmit: async (values, {resetForm}) => {
       try {
+        setLoading(true);
         await addDoc(collection(db, "transactions"), {
           user: session?.user?.id,
           amount: values.amount,
@@ -33,11 +43,13 @@ export default function AddFunds() {
           description: values.description,
           timeCreated: new Date(),
         })
-        alert("Funds added sucessfully");
+        setLoading(false);
+        setOpen(true);
         resetForm();
       }
       catch (errors) {
         console.error("Unabe to add funds: ", errors)
+        setLoading(false);
       }
     },
     validationSchema: schema,
@@ -108,12 +120,26 @@ export default function AddFunds() {
                 {touched.description && errors.description ? <span className="text-sm text-red-500">{errors.description}</span> : null}
               </div>
 
-              <button className="w-full h-13 rounded-md shadow-md text-white bg-[#1D4ED8] cursor-pointer active:opacity-75" type="submit">
-                Add Funds
+              <button className="w-full h-13 rounded-md shadow-md text-white bg-[#1D4ED8] cursor-pointer active:opacity-75 flex justify-center items-center gap-4" type="submit">
+                <span>Add Funds</span>
+                {loading ?  (
+                  <CircularProgress sx={{color: "white"}} size="30px" />)
+                  : null
+                }
               </button>
             </form>
           </CardContent>
         </Card>
+
+        <Dialog open={open} onClose={closeModel}>
+          <DialogTitle>Success</DialogTitle>
+          <DialogContent>
+            <Typography>Funds has been added sucessfuly</Typography>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeModel}>close</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </main>
   );

@@ -1,10 +1,14 @@
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaGoogle } from "react-icons/fa6";
 import { auth, signIn } from "@/auth";
+import { redirect } from "next/navigation";
 
 export default async function Login() {
   const session = await auth();
-  console.log(session);
+  
+  if (session) {
+    redirect("/");
+  }
 
   return (
     <main className="min-h-screen flex justify-center items-center px-20">

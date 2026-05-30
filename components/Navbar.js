@@ -10,7 +10,9 @@ export function Navbar() {
   return (
     <main className="bg-white shadow shadow-gray-300 w-full">
       <div className="h-15 px-5 flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-[#1D4ED8]">Finance App</h1>
+       <Link href="/">
+          <h1 className="text-3xl font-bold text-[#1D4ED8]">Finance App</h1>
+        </Link>
 
         <ul className="text-gray-800 hidden md:flex md:gap-8">
            <Link href="/dashboard/add-funds">
