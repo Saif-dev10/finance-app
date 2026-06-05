@@ -17,7 +17,7 @@ const schema = yup.object().shape({
 });
 
 export default function AddFunds() {
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false)
   const {data: session} = useSession();
 
@@ -37,20 +37,20 @@ export default function AddFunds() {
       try {
         setLoading(true);
         await addDoc(collection(db, "transactions"), {
-          user: session?.user?.id,
-          amount: values.amount,
-          category: values.category,
-          description: values.description,
-          timeCreated: new Date(),
-        })
+        user: session?.user?.id,
+        type: "withdrawal",
+        amount: Number(values.amount),
+        description: values.description,
+        timeCreated: new Date(),
+      });
         setLoading(false);
         setOpen(true);
         resetForm();
       }
       catch (errors) {
-        console.error("Unabe to add funds: ", errors)
-        setLoading(false);
-      }
+      console.error("unable withdraw funds:", errors);
+      setLoading(false);
+    }
     },
     validationSchema: schema,
   });
